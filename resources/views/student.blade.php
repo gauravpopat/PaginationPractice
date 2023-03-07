@@ -38,26 +38,45 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
+                        <?php
+                        if (array_key_exists('search', $_GET)) {
+                            echo "<th scope='col'>ID</th>";
+                            echo "<th scope='col'>Name</th>";
+                            echo "<th scope='col'>Email</th>";
+                            echo "<th scope='col'>Phone</th>";
+                            echo "<th scope='col'>City</th>";
+                        }else{
+                        ?>
                         <th scope="col">ID
                             <a href="{{ url('index/id/asc') }}" style="color: white;"><i class="bi bi-arrow-up"></i></a>
-                            <a href="{{ url('index/id/desc') }}" style="color: white;"><i class="bi bi-arrow-down"></i></a>
+                            <a href="{{ url('index/id/desc') }}" style="color: white;"><i
+                                    class="bi bi-arrow-down"></i></a>
                         </th>
                         <th scope="col">Name
-                            <a href="{{ url('index/name/asc') }}" style="color: white;"><i class="bi bi-arrow-up"></i></a>
-                            <a href="{{ url('index/name/desc') }}" style="color: white;"><i class="bi bi-arrow-down"></i></a>
+                            <a href="{{ url('index/name/asc') }}" style="color: white;"><i
+                                    class="bi bi-arrow-up"></i></a>
+                            <a href="{{ url('index/name/desc') }}" style="color: white;"><i
+                                    class="bi bi-arrow-down"></i></a>
                         </th>
                         <th scope="col">Email
-                            <a href="{{ url('index/email/asc') }}" style="color: white;"><i class="bi bi-arrow-up"></i></a>
-                            <a href="{{ url('index/email/desc') }}" style="color: white;"><i class="bi bi-arrow-down"></i></a>
+                            <a href="{{ url('index/email/asc') }}" style="color: white;"><i
+                                    class="bi bi-arrow-up"></i></a>
+                            <a href="{{ url('index/email/desc') }}" style="color: white;"><i
+                                    class="bi bi-arrow-down"></i></a>
                         </th>
                         <th scope="col">Phone
-                            <a href="{{ url('index/phone/asc') }}" style="color: white;"><i class="bi bi-arrow-up"></i></a>
-                            <a href="{{ url('index/phone/desc') }}" style="color: white;"><i class="bi bi-arrow-down"></i></a>
+                            <a href="{{ url('index/phone/asc') }}" style="color: white;"><i
+                                    class="bi bi-arrow-up"></i></a>
+                            <a href="{{ url('index/phone/desc') }}" style="color: white;"><i
+                                    class="bi bi-arrow-down"></i></a>
                         </th>
                         <th scope="col">City
-                            <a href="{{ url('index/city/asc') }}" style="color: white;"><i class="bi bi-arrow-up"></i></a>
-                            <a href="{{ url('index/city/desc') }}" style="color: white;"><i class="bi bi-arrow-down"></i></a>
+                            <a href="{{ url('index/city/asc') }}" style="color: white;"><i
+                                    class="bi bi-arrow-up"></i></a>
+                            <a href="{{ url('index/city/desc') }}" style="color: white;"><i
+                                    class="bi bi-arrow-down"></i></a>
                         </th>
+                        <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,7 +84,9 @@
                     $size = sizeof($students);
                     ?>
                     @if ($size == 0)
-                        <td>No Record Found!</td>
+                        <td colspan="5" class="text-center">No Record Found!
+                            <a class="btn btn-dark" href="{{ url('index') }}" style="color:white; cursor: pointer;">Main Page</a>
+                        </td>
                     @else
                         @foreach ($students as $student)
                             <tr>
