@@ -19,7 +19,7 @@ class StudentController extends Controller
             $students = Student::paginate(15);
         }
         else{
-            $students = Student::where('name','like','%'.$search.'%')->orWhere('city','like','%'.$search.'%')->orWhere('phone','like','%'.$search.'%')->orWhere('email','like','%'.$search.'%')->paginate(15);
+            $students = Student::where('name','like','%'.$search.'%')->orWhere('city','like','%'.$search.'%')->orWhere('phone','like','%'.$search.'%')->orWhere('email','like','%'.$search.'%')->orWhere('id',$search)->paginate(15);
         }
         return view('student', ['students' => $students]);
     }

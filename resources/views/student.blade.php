@@ -85,7 +85,8 @@
                     ?>
                     @if ($size == 0)
                         <td colspan="5" class="text-center">No Record Found!
-                            <a class="btn btn-dark" href="{{ url('index') }}" style="color:white; cursor: pointer;">Main Page</a>
+                            <a class="btn btn-dark" href="{{ url('index') }}"
+                                style="color:white; cursor: pointer;">Main Page</a>
                         </td>
                     @else
                         @foreach ($students as $student)
@@ -105,18 +106,15 @@
         </div>
 
 
-
-        <div class="row">
-            <div class="d-flex justify-content-center">
-                {{ $students->links() }}
-            </div>
-        </div>
-
-
-
-
-
-
+        <?php
+        if (empty($_GET['search'])){
+        echo "<div class='row'>";
+            echo "<div class='d-flex justify-content-center'>";
+                echo $students->links();
+            echo "</div>";
+        echo "</div>";
+        }?>
+        
     </div>
 
 
