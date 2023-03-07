@@ -39,7 +39,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <?php
-                        if (array_key_exists('search', $_GET)) {
+                        if (!empty($_GET['search'])) {
                             echo "<th scope='col'>ID</th>";
                             echo "<th scope='col'>Name</th>";
                             echo "<th scope='col'>Email</th>";
