@@ -35,7 +35,7 @@
         </form>
 
 
-        <div class="table table-responsive" style="width:100%">
+        <div class="table table-responsive table-hover" style="width:100%">
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -51,7 +51,7 @@
                     $size = sizeof($students);    
                     ?>
                     @if ($size == 0)
-                        <td>No record found as per your search</td>
+                        <td>No Record Found!</td>
                     @else
                         @foreach ($students as $student)
                             <tr>
