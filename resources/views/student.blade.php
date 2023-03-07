@@ -6,10 +6,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
 </head>
 
 <body>
@@ -33,22 +34,35 @@
                 </div>
             </div>
         </form>
-
-
         <div class="table table-responsive table-hover" style="width:100%">
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">City</th>
+                        <th scope="col">ID
+                            <a href="{{ url('index/id/asc') }}" style="color: white;"><i class="bi bi-arrow-up"></i></a>
+                            <a href="{{ url('index/id/desc') }}" style="color: white;"><i class="bi bi-arrow-down"></i></a>
+                        </th>
+                        <th scope="col">Name
+                            <a href="{{ url('index/name/asc') }}" style="color: white;"><i class="bi bi-arrow-up"></i></a>
+                            <a href="{{ url('index/name/desc') }}" style="color: white;"><i class="bi bi-arrow-down"></i></a>
+                        </th>
+                        <th scope="col">Email
+                            <a href="{{ url('index/email/asc') }}" style="color: white;"><i class="bi bi-arrow-up"></i></a>
+                            <a href="{{ url('index/email/desc') }}" style="color: white;"><i class="bi bi-arrow-down"></i></a>
+                        </th>
+                        <th scope="col">Phone
+                            <a href="{{ url('index/phone/asc') }}" style="color: white;"><i class="bi bi-arrow-up"></i></a>
+                            <a href="{{ url('index/phone/desc') }}" style="color: white;"><i class="bi bi-arrow-down"></i></a>
+                        </th>
+                        <th scope="col">City
+                            <a href="{{ url('index/city/asc') }}" style="color: white;"><i class="bi bi-arrow-up"></i></a>
+                            <a href="{{ url('index/city/desc') }}" style="color: white;"><i class="bi bi-arrow-down"></i></a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $size = sizeof($students);    
+                    $size = sizeof($students);
                     ?>
                     @if ($size == 0)
                         <td>No Record Found!</td>

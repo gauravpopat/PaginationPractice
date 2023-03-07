@@ -7,11 +7,15 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $column = null, $sorting = null)
     {
+
         $search = $request['search'] ?? "";
         
         if($search == ""){
+            if($sorting != null)
+            $students = Student::orderBy($column,$sorting)->paginate(15);
+            else
             $students = Student::paginate(15);
         }
         else{

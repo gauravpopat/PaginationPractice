@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 
-Route::get('index',[StudentController::class,'index'])->name('index');
+Route::get('index/{column?}/{sorting?}',[StudentController::class,'index'])->name('index');
