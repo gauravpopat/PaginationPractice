@@ -9,9 +9,7 @@ class StudentController extends Controller
 {
     public function index(Request $request, $column = null, $sorting = null)
     {
-
         $search = $request['search'] ?? "";
-        
         if($search == ""){
             if($sorting != null)
             $students = Student::orderBy($column,$sorting)->paginate(15);
