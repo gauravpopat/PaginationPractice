@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Http\Traits\ResponseTrait;
 
 class StudentController extends Controller
 {
+    use ResponseTrait;
     public function index(Request $request, $column = null, $sorting = null)
     {
         $search = $request['search'] ?? "";
         if ($search == "") {
             if ($sorting != null) {
                 $students = Student::orderBy($column, $sorting)->paginate(15);
-                $links = $students->appends(['sortby' => $column, 'order' => $sorting])->links();
             } else
                 $students = Student::paginate(15);
         } else {
@@ -29,6 +30,7 @@ class StudentController extends Controller
     {
         $search         = $request['search'];
         $perpage        = $request['perpage'] ? $request['perpage'] : 20;
+        
         $validation = Validator::make(
             $request->all(),
             [
@@ -40,32 +42,23 @@ class StudentController extends Controller
                 'orderBy.in'    => 'The selected Orderby is invalid, You can only enter id / name / email / phone /city'
             ]
         );
+
         if ($validation->fails())
-            return response()->json([
-                'status'    => false,
-                'error'     => $validation->errors()
-            ]);
+            return $this->validationErrorsResponse($validation);
 
         $inOrder = $request['inOrder'] ? $request['inOrder'] : 'ASC';
         $orderBy = $request['orderBy'] ? $request['orderBy'] : 'name';
 
         if ($search) {
-            $students = Student::where('name', 'like', '%' . $search . '%')->orWhere('city', 'like', '%' . $search . '%')->orWhere('phone', 'like', '%' . $search . '%')->orWhere('email', 'like', '%' . $search . '%')->orWhere('id', $search)->orderBy($orderBy,$inOrder)->paginate($perpage);
+            $students = Student::where('name', 'like', '%' . $search . '%')->orWhere('city', 'like', '%' . $search . '%')->orWhere('phone', 'like', '%' . $search . '%')->orWhere('email', 'like', '%' . $search . '%')->orWhere('id', $search)->orderBy($orderBy, $inOrder)->paginate($perpage);
 
             if (sizeof($students) == 0) {
-                return response()->json([
-                    'status'     => false,
-                    'message'    => 'No Data Found'
-                ]);
+                return $this->returnResponse('false', 'No Record Found');
             }
         } else {
             $students = Student::orderBy($orderBy, $inOrder)->paginate($perpage);
         }
 
-        return response()->json([
-            'status'    => true,
-            'message'   => 'Students:',
-            'students'  => $students
-        ]);
+        return $this->returnResponse(true, 'Students Information', $students);
     }
 }
