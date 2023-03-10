@@ -21,7 +21,7 @@ class StudentController extends Controller
             } else
                 $students = Student::paginate(15);
         } else {
-            $students = Student::where('name', 'like', '%' . $search . '%')
+            $students = Student::where('id', 'like', '%' . $search . '%')
                 ->orWhere('city', 'like', '%' . $search . '%')
                 ->orWhere('phone', 'like', '%' . $search . '%')
                 ->orWhere('email', 'like', '%' . $search . '%')
@@ -52,15 +52,15 @@ class StudentController extends Controller
         if ($validation->fails())
             return $this->validationErrorsResponse($validation);
 
-        $inOrder = $request['inOrder'] ? $request['inOrder'] : 'ASC';
         $orderBy = $request['orderBy'] ? $request['orderBy'] : 'name';
+        $inOrder = $request['inOrder'] ? $request['inOrder'] : 'ASC';
 
         if ($search) {
-            $students = Student::where('name', 'like', '%' . $search . '%')
+            $students = Student::where('id',$search)
                 ->orWhere('city', 'like', '%' . $search . '%')
-                ->orWhere('phone', 'like', '%' . $search . '%')
-                ->orWhere('email', 'like', '%' . $search . '%')
-                ->orWhere('id', $search)
+                ->orWhere('phone','like', '%' . $search . '%')
+                ->orWhere('email','like', '%' . $search . '%')
+                ->orWhere('name', 'like', '%' . $search . '%')
                 ->orderBy($orderBy, $inOrder)
                 ->paginate($perpage);
 
