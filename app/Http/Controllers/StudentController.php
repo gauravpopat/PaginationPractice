@@ -10,9 +10,11 @@ use App\Http\Traits\ResponseTrait;
 class StudentController extends Controller
 {
     use ResponseTrait;
+
+    //Pagination, Searching, Sorting with Blade
     public function index(Request $request, $column = null, $sorting = null)
     {
-        $search = $request['search'] ?? "";
+        $search = $request['search'];
         if ($search == "") {
             if ($sorting != null) {
                 $students = Student::orderBy($column, $sorting)->paginate(15);
@@ -23,7 +25,6 @@ class StudentController extends Controller
         }
         return view('student', compact('students'));
     }
-
 
     // Pagination, Searching, Sorting with API
     public function list(Request $request)
@@ -58,7 +59,6 @@ class StudentController extends Controller
         } else {
             $students = Student::orderBy($orderBy, $inOrder)->paginate($perpage);
         }
-
         return $this->returnResponse(true, 'Students Information', $students);
     }
 }
